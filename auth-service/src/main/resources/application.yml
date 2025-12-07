@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: auth-service
+
+server:
+  port: 8084
+
+spring.datasource:
+  url: jdbc:postgresql://postgres-anal:5432/authdb
+  username: authuser
+  password: authpass
+  driver-class-name: org.postgresql.Driver
+
+spring.jpa:
+  hibernate:
+    ddl-auto: update
+  show-sql: false
+  open-in-view: false
+
+eureka:
+  client:
+    enabled: true
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true

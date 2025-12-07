@@ -1,0 +1,10 @@
+rootProject.name = 'task-tracker'
+include 'analytics-service'
+include 'api-gateway'
+include 'auth-service'
+include 'discovery-service'
+include 'notification-service'
+include 'task-service'
+
+
+
