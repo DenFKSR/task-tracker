@@ -1,5 +1,6 @@
 package com.example.taskservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -7,7 +8,6 @@ import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,6 +33,7 @@ public class Project {
     /**
      * Название проекта — краткий идентификатор, отображаемый пользователю.
      */
+    @Column(unique = true, nullable = false)
     String name;
 
     /**
@@ -55,9 +56,10 @@ public class Project {
      * Список задач, связанных с этим проектом.
      * Отображает связь "один ко многим": один проект — много задач.
      */
-    @OneToMany
-    @JoinColumn(name = "task_id")
-    List <Task> tasks = new ArrayList<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference(value = "project_tasks")
+    List <Task> tasks;
 
     /**
      * Дата и время создания проекта.

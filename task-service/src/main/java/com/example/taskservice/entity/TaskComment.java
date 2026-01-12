@@ -1,5 +1,6 @@
 package com.example.taskservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Entity
-@Table(name = "task")
+@Table(name = "task_comment")
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TaskComment {
 
@@ -42,14 +43,15 @@ public class TaskComment {
     /**
      *
      */
-    @ManyToOne
-    @JoinColumn(name = "task_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "task_id", nullable = false)
     Task task;
 
     /**
      *
      */
     @Column(name = "created_at")
+    @JsonFormat(pattern = "dd.MM.yyyy")
     LocalDateTime createdAt;
 
 }

@@ -38,7 +38,7 @@ public class RefreshToken {
      * Пользователь, которому принадлежит данный refresh-токен.
      * Связь один-к-одному: один пользователь — один активный refresh-токен (в рамках данной модели)
      */
-    @OneToOne
+    @OneToOne//
     @JoinColumn(name = "user_id")
     User user;
 

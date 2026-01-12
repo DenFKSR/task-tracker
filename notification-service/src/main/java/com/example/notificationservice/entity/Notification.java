@@ -47,7 +47,7 @@ public class Notification {
     String message;
 
     /**
-     * Тип уведомления (например, {@code INFO}, {@code WARNING}, {@code ALERT}).
+     * Тип уведомления (например, {@code TASK_ASSIGNED}, {@code TASK_UPDATED}, {@code DEADLINE_SOON}).
      * Используется для определения приоритета или визуального оформления.
      */
     NotificationType type;
@@ -60,7 +60,7 @@ public class Notification {
 
     /**
      * Тип связанной сущности, которая вызвала уведомление.
-     * Например: {@code TASK}, {@code PROJECT}, {@code COMMENT} и т.д.
+     * Например: {@code TASK}, {@code PROJECT}, {@code etc}
      */
     @Column(name="related_entity_type")
     RelatedEntityType relatedEntityType; // TASK, PROJECT, etc.

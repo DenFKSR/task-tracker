@@ -1,5 +1,7 @@
 package com.example.taskservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,6 +33,7 @@ public class Task {
     /**
      * Заголовок (название) задачи — краткое описание сути задачи.
      */
+    @Column(unique = true, nullable = false)
     String title;
 
     /**
@@ -66,8 +69,9 @@ public class Task {
      * Проект, к которому относится задача.
      * Связь "многие к одному": множество задач могут принадлежать одному проекту.
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
+    //@JsonBackReference("project_tasks")
     Project project;
 
     /**
@@ -79,7 +83,7 @@ public class Task {
 
 
     /**
-     *
+     * Время на выполнение задачи
      */
     @Column(name = "estimate_hours")
     Double estimatedHours;
@@ -88,8 +92,7 @@ public class Task {
      * Список комментариев, оставленных к задаче.
      * Связь "один ко многим": одна задача — много комментариев.
      */
-    @OneToMany
-    @JoinColumn(name = "taskComment_id")
+    @OneToMany(mappedBy = "task", cascade = CascadeType.ALL, orphanRemoval = true)
     List <TaskComment> comments = new ArrayList<>();
 
     /**
